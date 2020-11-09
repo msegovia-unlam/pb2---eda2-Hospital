@@ -32,9 +32,8 @@ public class SistemaHospital {
 	// FEDERICO
 	public Boolean registrarMedico(Medico medico) {
 		
-		medicos.add(medico);
-		
-		return true;
+		return this.medicos.add(medico);
+	
 	}
 	// ARIAN
 	public Boolean registrarPaciente(Paciente paciente) {
@@ -51,8 +50,7 @@ public class SistemaHospital {
 	// FEDERICO
 	public Boolean agregarEspecialidad(Especialidad especialidad) {
 		
-		especialidades.add(especialidad);
-		return true;
+		return this.especialidades.add(especialidad);
 	}
 	// MARTIN
 	public Boolean registrarPiso(Piso piso) {
@@ -71,7 +69,15 @@ public class SistemaHospital {
 	}
 	// FEDERICO
 	public Medico buscarMedico(Integer idMedico) {
-		return null;
+		
+		Medico medicoEncontrado = null;
+		
+		for(Medico medico: medicos) {
+			if(medico.getId().equals(idMedico)) {
+			  medicoEncontrado = medico;
+			}
+		}
+		return medicoEncontrado;
 	}
 	// ARIAN
 	public Paciente buscarPaciente(Integer idPaciente) {
@@ -79,7 +85,15 @@ public class SistemaHospital {
 	}
 	// FEDERICO
 	public Especialidad buscarEspecialidad(Integer idEspecialidad) {
-		return null;
+		
+		Especialidad especialidadEncontrada = null;
+		
+		for(Especialidad especialidad: especialidades) {
+			if(especialidad.getId().equals(idEspecialidad)) {
+				especialidadEncontrada = especialidad;
+			}
+		}
+		return especialidadEncontrada;
 	}
 	
 	//Scarlet >> Busca si existe un administrativo y lo retorna
