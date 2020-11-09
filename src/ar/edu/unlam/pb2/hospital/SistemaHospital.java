@@ -32,7 +32,9 @@ public class SistemaHospital {
 	// FEDERICO
 	public Boolean registrarMedico(Medico medico) {
 		
-		return null;
+		medicos.add(medico);
+		
+		return true;
 	}
 	// ARIAN
 	public Boolean registrarPaciente(Paciente paciente) {
@@ -49,7 +51,8 @@ public class SistemaHospital {
 	// FEDERICO
 	public Boolean agregarEspecialidad(Especialidad especialidad) {
 		
-		return null;
+		especialidades.add(especialidad);
+		return true;
 	}
 	// MARTIN
 	public Boolean registrarPiso(Piso piso) {
