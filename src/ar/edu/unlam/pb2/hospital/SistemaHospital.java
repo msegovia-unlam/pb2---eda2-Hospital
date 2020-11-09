@@ -14,7 +14,8 @@ public class SistemaHospital {
 	private HashSet<Internacion> internacionesIngresadas;
 	private HashSet<ConsultaSinTurno> consultasSinTurno;
 	private HashSet<ConsultaConTurno> consultasConTurno;
-	
+	private Integer idTurno = 1;
+	private Integer idConsultaSinTurno = 1;
 	
 	public SistemaHospital(String nombre) {
 		this.nombre = nombre;
@@ -89,10 +90,17 @@ public class SistemaHospital {
 		return adminBuscado;
 	}
 		
-	// Scarlet 
+	// Scarlet >>Busca si existe un turno y lo devuelve
 	public Turno buscarTurno(Integer idTurno) {
-		return null;
+		Turno turnoBuscado = null;
+		for(Turno turno : this.turnosAsignados) {
+			if(turno.getId().equals(idTurno)) {
+				turnoBuscado = turno;
+			}
+		}
+		return turnoBuscado;
 	}
+	
 	// MARTIN
 	public Piso buscarPiso(Integer idPiso) {
 		return null;
@@ -105,11 +113,29 @@ public class SistemaHospital {
 	public Boolean darDeAltaAPaciente(Integer dni) {
 		return null;
 	}
-	// Scarlet
-	public Boolean asignarTurnoAPaciente(Integer dni, Especialidad especialidad, Integer idMedico) {
+	
+	// Scarlet >>Valida la existencia de todos los objetos y asigna un turno al paciente.
+	public Boolean asignarTurnoAPaciente(Integer idPaciente, Integer idEspecialidad, Integer idMedico, Integer idAdministrativo, String fecha) {
+		Boolean asignacionExitosa = false;
 		
-		return null;
+		Paciente pacienteBuscado = buscarPaciente(idPaciente);
+		Especialidad especialidadBuscada = buscarEspecialidad(idEspecialidad);
+		Medico medicoBuscado = buscarMedico(idMedico);
+		Administrativo adminBuscado = buscarAdministrativo(idAdministrativo);
+		if(adminBuscado!=null && pacienteBuscado!=null && especialidadBuscada!=null) {
+			if(medicoBuscado!=null && especialidadBuscada.obtenerListaDeProfesionales().contains(medicoBuscado)) {
+				Turno nuevoTurno = new Turno(idTurno, fecha, pacienteBuscado, medicoBuscado, especialidadBuscada, adminBuscado);
+				idTurno++;
+				
+				this.turnosAsignados.add(nuevoTurno);
+				pacienteBuscado.getTurnos().add(nuevoTurno);
+				
+				asignacionExitosa = true;
+			}
+		}
+		return asignacionExitosa;
 	}
+	
 	// Scarlet
 	public Boolean cancelarTurno(Integer idTurno) {
 		
