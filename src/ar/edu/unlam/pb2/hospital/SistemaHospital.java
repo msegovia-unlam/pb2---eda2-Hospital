@@ -32,7 +32,8 @@ public class SistemaHospital {
 	// FEDERICO
 	public Boolean registrarMedico(Medico medico) {
 		
-		return null;
+		return this.medicos.add(medico);
+	
 	}
 	// ARIAN
 	public Boolean registrarPaciente(Paciente paciente) {
@@ -49,7 +50,7 @@ public class SistemaHospital {
 	// FEDERICO
 	public Boolean agregarEspecialidad(Especialidad especialidad) {
 		
-		return null;
+		return this.especialidades.add(especialidad);
 	}
 	// MARTIN
 	public Boolean registrarPiso(Piso piso) {
@@ -68,7 +69,15 @@ public class SistemaHospital {
 	}
 	// FEDERICO
 	public Medico buscarMedico(Integer idMedico) {
-		return null;
+		
+		Medico medicoEncontrado = null;
+		
+		for(Medico medico: medicos) {
+			if(medico.getId().equals(idMedico)) {
+			  medicoEncontrado = medico;
+			}
+		}
+		return medicoEncontrado;
 	}
 	// ARIAN
 	public Paciente buscarPaciente(Integer idPaciente) {
@@ -76,7 +85,15 @@ public class SistemaHospital {
 	}
 	// FEDERICO
 	public Especialidad buscarEspecialidad(Integer idEspecialidad) {
-		return null;
+		
+		Especialidad especialidadEncontrada = null;
+		
+		for(Especialidad especialidad: especialidades) {
+			if(especialidad.getId().equals(idEspecialidad)) {
+				especialidadEncontrada = especialidad;
+			}
+		}
+		return especialidadEncontrada;
 	}
 	
 	//Scarlet >>> Busca si existe un administrativo y lo retorna
@@ -146,10 +163,19 @@ public class SistemaHospital {
 		
 		return null;
 	}
-	// FEDERICO
-	public Boolean darDeBajaUnMedico(Integer dniMedico) {
+	
+	/*TODO ECHO FEDERICO*/
+
+	public Boolean darDeBajaUnMedico(Integer idMedico) {
 		
-		return null;
+		for(Medico medico: medicos) {
+			if(medico.getId().equals(idMedico)) {
+				medicos.remove(medico);
+				
+				return true;
+			}
+		}
+		return false;
 	}
 	// FEDERICO
 	public Boolean cambiarDeEspecialidadAUnMedico(Integer dniMedico, Integer idEspecialidad) {
@@ -184,11 +210,20 @@ public class SistemaHospital {
 		
 		return null;
 	}
-	// FEDERICO
+	/*TODO ECHO FEDERICO*/
 	public Integer obtenerCantidadDeConsultasPorEspecialidad(Integer idEspecialidad) {
 		
-		return null;
+		Integer cantidadConsultasPorEspecialidad = 0;
+		
+		for(Turno turno: turnosAsignados) {
+			if(turno.getEspecialidad().getId().equals(idEspecialidad)) {
+				
+				cantidadConsultasPorEspecialidad++;
+			}
+		}
+		return cantidadConsultasPorEspecialidad;
 	}
+
 	// Martin
 	public HashSet<String> obtenerListaDeHabitacionesOcupadas(Integer piso){
 			
