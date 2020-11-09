@@ -40,7 +40,7 @@ public class SistemaHospital {
 		return null;
 	}
 	
-	// SCARLET >>Agrega administrativos a la lista del hospital
+	// SCARLET >>> Agrega administrativos a la lista del hospital
 	public Boolean registrarAdministrativo(Administrativo administrativo) {
 		
 		return this.administrativos.add(administrativo);
@@ -79,7 +79,7 @@ public class SistemaHospital {
 		return null;
 	}
 	
-	//Scarlet >> Busca si existe un administrativo y lo retorna
+	//Scarlet >>> Busca si existe un administrativo y lo retorna
 	public Administrativo buscarAdministrativo(Integer idAdministrativo) {
 		Administrativo adminBuscado = null;
 		for(Administrativo administrativo : this.administrativos) {
@@ -90,7 +90,7 @@ public class SistemaHospital {
 		return adminBuscado;
 	}
 		
-	// Scarlet >>Busca si existe un turno y lo devuelve
+	// Scarlet >>> Busca si existe un turno y lo devuelve
 	public Turno buscarTurno(Integer idTurno) {
 		Turno turnoBuscado = null;
 		for(Turno turno : this.turnosAsignados) {
@@ -114,7 +114,7 @@ public class SistemaHospital {
 		return null;
 	}
 	
-	// Scarlet >>Valida la existencia de todos los objetos y asigna un turno al paciente.
+	// Scarlet >>> Valida la existencia de todos los objetos y asigna un turno al paciente.
 	public Boolean asignarTurnoAPaciente(Integer idPaciente, Integer idEspecialidad, Integer idMedico, Integer idAdministrativo, String fecha) {
 		Boolean asignacionExitosa = false;
 		
