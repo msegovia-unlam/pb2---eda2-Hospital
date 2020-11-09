@@ -38,11 +38,13 @@ public class SistemaHospital {
 		
 		return null;
 	}
-	// SCARLET
-	public Boolean registrarPersonalAdministrativo(Administrativo administrativo) {
+	
+	// SCARLET >>Agrega administrativos a la lista del hospital
+	public Boolean registrarAdministrativo(Administrativo administrativo) {
 		
-		return null;
+		return this.administrativos.add(administrativo);
 	}
+	
 	// FEDERICO
 	public Boolean agregarEspecialidad(Especialidad especialidad) {
 		
@@ -75,6 +77,18 @@ public class SistemaHospital {
 	public Especialidad buscarEspecialidad(Integer idEspecialidad) {
 		return null;
 	}
+	
+	//Scarlet >> Busca si existe un administrativo y lo retorna
+	public Administrativo buscarAdministrativo(Integer idAdministrativo) {
+		Administrativo adminBuscado = null;
+		for(Administrativo administrativo : this.administrativos) {
+			if(administrativo.getId().equals(idAdministrativo)) {
+				adminBuscado = administrativo;
+			}
+		}
+		return adminBuscado;
+	}
+		
 	// Scarlet 
 	public Turno buscarTurno(Integer idTurno) {
 		return null;
