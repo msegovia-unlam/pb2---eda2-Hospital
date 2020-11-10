@@ -317,12 +317,19 @@ public class SistemaHospital {
 	// Martin
 	public Integer obtenerCantidadDeHabitacionesOcupadas() {
 		
-		return null;
+		return internacionesIngresadas.size();
 	}
 	// MARTIN
 	public Integer obtenerCantidadDePersonasQueNoAsistieronAlTurno() {
-		
-		return null;
+		Integer cantidadPersonas = 0;
+		for (ConsultaConTurno cTurno : this.consultasConTurno) {			
+			for (Turno turnAs : this.turnosAsignados) {
+				if (!cTurno.getId().equals(turnAs.getId())) {
+					cantidadPersonas++;
+				}			
+			}		
+		}
+		return cantidadPersonas;
 	}
 	// Scarlet
 	public HashSet<Paciente> obtenerListaDePacientesQueNoAsistieronAlTurno(){
