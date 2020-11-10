@@ -226,7 +226,7 @@ public class SistemaHospital {
 		return false;
 	}
 	// FEDERICO
-	public Boolean cambiarDeEspecialidadAUnMedico(Integer idMedico, String especialidad) {
+	public Boolean cambiarDeEspecialidadAUnMedico(Integer idMedico,  String especialidad) {
 		
 		for(Medico medico : medicos) {
 			if(medico.getId().equals(idMedico)) {

@@ -9,7 +9,7 @@ import junit.framework.Assert;
 
 public class HospitalTest {
 
-	@Test
+	/*@Test
 	public void queSePuedaRegistrarUnAdministrativoEnElHospital() {
 		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
 		Administrativo admin = new Administrativo("Gustavo", "Ruiz", 30299991, 3, "10-03-2019", 45.000, "Recepcionista");
@@ -117,6 +117,29 @@ public class HospitalTest {
 		hospital.agregarEspecialidad(especialidad);
 		assertTrue(hospital.cambiarDeEspecialidadAUnMedico(01, "Cardiologia"));
 		
+	}*/
+	
+	@Test
+	public void testQueObtengaCantidadDeConsultasPorEspecialidad() {
+		
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Medico medico = new Medico("Pablo", "Gomez", 25380657,01,"01-01-2020",60000.0,159865,"Cardiologo");
+		hospital.registrarMedico(medico);
+		Especialidad especialidad = new Especialidad(01,"Cardiologia");
+		hospital.agregarEspecialidad(especialidad);
+		Administrativo administrativo = new Administrativo("Gustavo", "Ruiz", 30299991, 01, "10-03-2019", 45.000, "Recepcionista");
+		hospital.registrarAdministrativo(administrativo);
+		Paciente paciente = new Paciente("Juan","Martinez",23689741,01,"Problemas cardiologicos",79.0,180.0);
+		hospital.registrarPaciente(paciente);
+		
+		hospital.asignarTurnoAPaciente(01, 01, 01, 01, "10-11-2020");
+		hospital.asignarTurnoAPaciente(01, 01, 01, 01, "20-11-2020");
+		hospital.asignarTurnoAPaciente(01, 01, 01, 01, "08-12-2020");
+		
+		Integer cantidadDeConsultas = 3;
+		
+		assertEquals(cantidadDeConsultas, hospital.obtenerCantidadDeConsultasPorEspecialidad(01));
 	}
+	
 	
 }
