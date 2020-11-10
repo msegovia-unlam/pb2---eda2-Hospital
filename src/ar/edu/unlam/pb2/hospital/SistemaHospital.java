@@ -340,11 +340,22 @@ public class SistemaHospital {
 		}
 		return cantidadPersonas;
 	}
-	// Scarlet
+	
+	/* Scarlet >>Compara los turnos que ya fueron asignados con las consultasConTurno (Esta consulta se genera cuando 
+	un paciente que tenia un turno se presenta a la consulta). Entonces, si el turnoAsignado no coincide con ningun turno
+	de una consulta el paciente de ese turnoAsignado no se presento aun */
 	public HashSet<Paciente> obtenerListaDePacientesQueNoAsistieronAlTurno(){
-		
-		return null;
+		HashSet<Paciente> pacientesQueNOAsistieronAlTurno = new HashSet<>();
+		for(Turno turno : this.turnosAsignados) {
+			for(ConsultaConTurno consulta : this.consultasConTurno) {
+				if(!turno.equals(consulta.getTurno())){
+					pacientesQueNOAsistieronAlTurno.add(turno.getPaciente());
+				}
+			}
+		}
+		return pacientesQueNOAsistieronAlTurno;
 	}
+	
 	// Federico
 	public HashSet<Medico> obtenerListaDeMedicosDeUnaEspecialidad(Integer idEspecialidad){
 		
@@ -359,6 +370,12 @@ public class SistemaHospital {
 	public HashSet<Turno> obtenerListaDeTurnosDeUnPaciente(Integer dni){
 		
 		return null;
+	}
+	public HashSet<Administrativo> getAdministrativos() {
+		return administrativos;
+	}
+	public void setAdministrativos(HashSet<Administrativo> administrativos) {
+		this.administrativos = administrativos;
 	}
 	
 	
