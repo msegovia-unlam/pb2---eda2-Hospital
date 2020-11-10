@@ -1,6 +1,7 @@
 package ar.edu.unlam.pb2.hospital;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -140,6 +141,27 @@ public class HospitalTest {
 		
 		assertEquals(cantidadDeConsultas, hospital.obtenerCantidadDeConsultasPorEspecialidad(01));
 	}
+	
+	@Test
+	public void testParaUnMedicoNoEncontrado() {
+		
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Medico medicoAEncontrar = new Medico("Pablo", "Gomez", 25380657,01,"01-01-2020",60000.0,159865,"Cardiologo");
+		hospital.registrarMedico(medicoAEncontrar);
+		Medico medico = hospital.buscarMedico(02);
+		assertNotSame(medicoAEncontrar, medico);
+	}
+	
+	@Test
+	public void testParaUnaEspecialidadInexistente() {
+		
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Especialidad especialidadAEncontrar = new Especialidad(01,"Cardiologia");
+		hospital.agregarEspecialidad(especialidadAEncontrar);
+		Especialidad especialidad = hospital.buscarEspecialidad(02);
+		assertNotSame(especialidadAEncontrar, especialidad);
+	}
+	
 	
 	
 }
