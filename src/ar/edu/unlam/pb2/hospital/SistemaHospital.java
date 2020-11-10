@@ -217,10 +217,13 @@ public class SistemaHospital {
 		return null;
 	}
 	
-	/* TODO	REVISAR Scarlet */
+	//Scarlet >>Verifica si el turno ya fue asignado, si no fue asignado el mismo se encuentra disponible -- devuelve True
 	public Boolean consultarDisponibilidadDeUnTurno(Integer idTurno) {
-		
-		return null;
+		Boolean turnoDisponible = false;
+		if(buscarTurno(idTurno)==null) {
+			turnoDisponible = true;
+		}
+		return turnoDisponible;
 	}
 	
 	// MARTIN
@@ -234,11 +237,27 @@ public class SistemaHospital {
 		
 		return null;
 	}
-	// SCARLET
-	public Boolean crearNuevaConsultaSinTurno(Paciente paciente, Especialidad especialidad, Integer idMedico) {
+	
+	/* SCARLET >> Valida la existencia de los diferentes objetos y ademas valida que el medico atienda en la especialidad especificada.
+		Si todo es valido, se crea la consulta sin turno.*/
+	public Boolean crearNuevaConsultaSinTurno(Integer idPaciente, Integer idEspecialidad, Integer idMedico, Integer idAdministrativo, String fecha, String observacion) {
+		Boolean creacionExitosa = false;
 		
-		return null;
+		Paciente pacienteBuscado = buscarPaciente(idPaciente);
+		Especialidad especialidadBuscada = buscarEspecialidad(idEspecialidad);
+		Medico medicoBuscado = buscarMedico(idMedico);
+		Administrativo adminBuscado = buscarAdministrativo(idAdministrativo);
+		
+		if(pacienteBuscado!=null && adminBuscado!=null && especialidadBuscada!=null) {
+			if(medicoBuscado!=null && especialidadBuscada.obtenerListaDeProfesionales().contains(medicoBuscado)) {
+					ConsultaSinTurno nuevaConsulta = new ConsultaSinTurno(idConsultaSinTurno, fecha, pacienteBuscado, medicoBuscado, especialidadBuscada, adminBuscado, observacion); 
+					idConsultaSinTurno++;
+					creacionExitosa = true;
+				}
+			}
+		return creacionExitosa;
 	}
+	
 	// ARIAN
 	public Integer obtenerCantidadDePacientesInternados() {
 		
