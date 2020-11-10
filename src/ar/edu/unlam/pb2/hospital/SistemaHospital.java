@@ -16,6 +16,7 @@ public class SistemaHospital {
 	private HashSet<ConsultaConTurno> consultasConTurno;
 	private Integer idTurno = 1;
 	private Integer idConsultaSinTurno = 1;
+	private Integer idconsultaCT =1;
 	
 	public SistemaHospital(String nombre) {
 		this.nombre = nombre;
@@ -250,9 +251,18 @@ public class SistemaHospital {
 	}
 	
 	/* TODO	PRESENTISMO MARTIN*/
-	public Boolean crearNuevaConsultaConTurno(Integer idTurnoAsignado) {
+	public Boolean crearNuevaConsultaConTurno(Integer idTurnoAsignado, String fechaCT, String observaciones, Administrativo administrativo) {
 		
-		return null;
+		Turno turno = buscarTurno(idTurnoAsignado);
+		
+		if(turno != null) {
+			ConsultaConTurno consultaCT = new ConsultaConTurno(idconsultaCT, fechaCT, turno, administrativo, observaciones);
+			consultasConTurno.add(consultaCT);
+			idconsultaCT++;
+			
+			return true;
+		}
+		return false;		
 	}
 	
 	/* SCARLET >> Valida la existencia de los diferentes objetos y ademas valida que el medico atienda en la especialidad especificada.
@@ -295,9 +305,14 @@ public class SistemaHospital {
 	}
 
 	// Martin
-	public HashSet<String> obtenerListaDeHabitacionesOcupadas(Integer piso){
-			
-		return null;
+	public HashSet<Integer> obtenerListaDeHabitacionesOcupadas(Integer piso){
+		HashSet<Integer> habOcupadas = new HashSet<Integer>();
+		
+		for(Internacion internacion : this.internacionesIngresadas) {
+			habOcupadas.add(internacion.getHabitacion());
+		}			
+		return  habOcupadas;
+		
 	}
 	// Martin
 	public Integer obtenerCantidadDeHabitacionesOcupadas() {
