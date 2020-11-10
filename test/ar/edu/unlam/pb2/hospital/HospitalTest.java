@@ -1,6 +1,7 @@
 package ar.edu.unlam.pb2.hospital;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
@@ -222,6 +223,43 @@ public class HospitalTest {
 		hospital1.agregarEspecialidad(especialidad1);		
 		
 		assertTrue(hospital1.registrarMedicoEnEspecialidad(20, 11));
+	}
+	
+	@Test
+	public void testQuePuedaBuscarUnPiso() {
+		SistemaHospital hospital1 = new SistemaHospital("nuevoHospital");
+		Piso piso2 = new Piso(2, 2);
+		Piso piso3 = new Piso(3, 3);
+		Piso piso4 = new Piso(4, 4);
+		
+		hospital1.registrarPiso(piso2);
+		hospital1.registrarPiso(piso3);
+		hospital1.registrarPiso(piso4);
+		
+		Piso pisoBuscado = hospital1.buscarPiso(3);
+		
+		assertEquals(piso3, pisoBuscado);
+		
+	}
+	
+	@Test
+	public void testQuePermitaConsultarDisponibilidadDeUnaHabitacion() {
+		SistemaHospital hospital1 = new SistemaHospital("nuevoHospital");
+		Piso piso1 = new Piso(1, 1);		
+		Paciente juan = new Paciente("Juan", "Gonzales", 328884924, 1, "Sin enfermedades", 80.0, 17.5);
+		Paciente andres = new Paciente("Andres", "Lopez", 328815479, 2, "Sin enfermedades", 77.0, 17.8);
+		Paciente martin = new Paciente("Martin", "Garcia", 328819517, 3, "Sin enfermedades", 75.0, 17.5);
+		
+		
+		Internacion internacion1 = new Internacion(1, juan, 1, piso1, "10/11/2020", null, "en observacion");
+		Internacion internacion2 = new Internacion(2, andres, 2, piso1, "08/11/2020", null, "en observacion");
+		Internacion internacion3 = new Internacion(3, martin, 3, piso1, "07/11/2020", null, "en observacion");
+		
+		hospital1.registrarInternacion(328884924, piso1, 1);
+		hospital1.registrarInternacion(328815479, piso1, 2);
+		hospital1.registrarInternacion(328819517, piso1, 3);
+		
+		assertFalse(hospital1.consultarDisponibilidadDeUnaHabitacion(1, 1));;
 	}
 	
 }
