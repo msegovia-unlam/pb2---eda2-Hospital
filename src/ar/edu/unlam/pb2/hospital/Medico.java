@@ -3,15 +3,24 @@ package ar.edu.unlam.pb2.hospital;
 public class Medico extends Empleado{
 	
 	private Integer matricula;
+	private String especialidad;
 	
-	public Medico(String nombre, String apellido, Integer dni, Integer id, String inicioDeActividad, Double sueldo, Integer matricula) {
+	public Medico(String nombre, String apellido, Integer dni, Integer id, String inicioDeActividad, Double sueldo, Integer matricula, String especialidad) {
 		super(nombre, apellido, dni, id, inicioDeActividad, sueldo);
 		this.matricula = matricula;
+		this.especialidad = especialidad;
 	}
 
 	
 	//HASCODE / EQUALS 
-	
+	public String getEspecialidad() {
+		return especialidad;
+	}
+
+
+	public void setEspecialidad(String especialidad) {
+		this.especialidad = especialidad;
+	}
 	
 	@Override
 	public Integer obtenerAntiguedad() {
