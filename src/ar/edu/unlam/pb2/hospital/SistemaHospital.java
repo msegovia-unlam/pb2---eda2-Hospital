@@ -165,10 +165,37 @@ public class SistemaHospital {
 		return cancelacionExitosa;
 	}
 	
-	// Scarlet
-	public Boolean cambiarTurno(Integer idTurno, String dia) {
+	/*Scarlet >>Valida la existencia del turno por su ID y a continuacion modifica la fecha del mismo tanto en la lista
+	de turnosAsignados del Hospital como en la lista de turnos del paciente*/
+	public Boolean cambiarTurno(Integer idTurno, String nuevaFecha) {
+		Boolean modificacionExitosa = false;
 		
-		return null;
+		Turno turnoBuscado = buscarTurno(idTurno);
+		if(turnoBuscado!=null) {
+			turnoBuscado.setDia(nuevaFecha);
+			modificarTurnoEnLaListaDeTurnosDelPaciente(idTurno, nuevaFecha);
+			
+			modificacionExitosa = true;
+		}
+		return modificacionExitosa;
+	}
+	/*Scarlet >>Modifica la fecha del turno en la lista de turnos del paciente: primero se obtiene dicha lista
+	y despues se le cambia la fecha por la nueva fecha. Es un metodo privado ya que solo se accede a el cuando se cambia un turno*/
+	private Boolean modificarTurnoEnLaListaDeTurnosDelPaciente(Integer idTurno, String nuevaFecha){
+		Boolean accionExitosa = false;
+		HashSet<Turno> listaDeTurnosDelPaciente;
+		
+		Turno turnoBuscado = buscarTurno(idTurno);
+		if(turnoBuscado!=null) {
+			listaDeTurnosDelPaciente = turnoBuscado.getPaciente().getTurnos();
+			for(Turno turno : listaDeTurnosDelPaciente) {
+				if(turno.equals(turnoBuscado)) {
+					turno.setDia(nuevaFecha);
+				}
+			}
+			accionExitosa = true;
+		}
+		return accionExitosa;
 	}
 	
 	/*TODO ECHO FEDERICO*/
