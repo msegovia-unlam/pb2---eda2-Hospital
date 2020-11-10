@@ -128,7 +128,12 @@ public class SistemaHospital {
 	
 	// MARTIN
 	public Piso buscarPiso(Integer idPiso) {
-		return null;
+		
+		for (Piso piso : this.pisos) {
+		if	(piso.getId().equals(idPiso))
+			return piso;
+		}
+		return null;		
 	}
 	// ARIAN
 	public Internacion buscarInternacion(Integer idInternacion) {
@@ -237,7 +242,11 @@ public class SistemaHospital {
 	// MARTIN
 	public Boolean consultarDisponibilidadDeUnaHabitacion(Integer numeroPiso, Integer habitacion) {
 		
-		return null;
+		for(Internacion internacion : this.internacionesIngresadas) {
+			if (internacion.getPiso().getNumero().equals(numeroPiso) && internacion.getHabitacion().equals(habitacion))
+				return false;
+		}			
+		return true;
 	}
 	
 	/* TODO	PRESENTISMO MARTIN*/
