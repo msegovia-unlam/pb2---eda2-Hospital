@@ -371,11 +371,22 @@ public class SistemaHospital {
 		
 		return null;
 	}
+	
+	
 	public HashSet<Administrativo> getAdministrativos() {
 		return administrativos;
 	}
+	
 	public void setAdministrativos(HashSet<Administrativo> administrativos) {
 		this.administrativos = administrativos;
+	}
+	
+	public HashSet<Turno> getTurnosAsignados() {
+		return this.turnosAsignados;
+	}
+	
+	public void setTurnosAsignados(HashSet<Turno> turnosAsignados) {
+		this.turnosAsignados = turnosAsignados;
 	}
 	
 	
