@@ -1,8 +1,11 @@
 package ar.edu.unlam.pb2.hospital;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import junit.framework.Assert;
 
 public class HospitalTest {
 
@@ -62,6 +65,58 @@ public class HospitalTest {
 		assertEquals(cantidadEsperada, cantidadTurnos);
 	}
 	
+	@Test
+	public void testQueSePuedaAgregarUnMedico() {
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Medico medico = new Medico("Pablo", "Gomez", 25380657,01,"01-01-2020",60000.0,159865,"Cardiologo");
+		assertTrue(hospital.registrarMedico(medico));
+	}
 	
+	@Test
+	public void testQueSePuedaAgregarUnaEspecialidad() {
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Especialidad especialidad = new Especialidad(01,"Cardiologia");
+		assertTrue(hospital.agregarEspecialidad(especialidad));
+	}
+	
+	@Test
+	public void testQueSeBuscaUnMedico() {
+		
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Medico medicoAEncontrar = new Medico("Pablo", "Gomez", 25380657,01,"01-01-2020",60000.0,159865,"Cardiologo");
+		hospital.registrarMedico(medicoAEncontrar);
+		Medico medico = hospital.buscarMedico(01);
+		assertEquals(medicoAEncontrar, medico);
+	}
+	
+	@Test
+	public void testQueBuscaUnaEspecialidad() {
+		
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Especialidad especialidadAEncontrar = new Especialidad(01,"Cardiologia");
+		hospital.agregarEspecialidad(especialidadAEncontrar);
+		Especialidad especialidad = hospital.buscarEspecialidad(01);
+		assertEquals(especialidadAEncontrar, especialidad);
+	}
+	
+	@Test
+	public void testQueSePuedaDarDeBajaUnMedico() {
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Medico medicoAEncontrar = new Medico("Pablo", "Gomez", 25380657,01,"01-01-2020",60000.0,159865,"Cardiologo");
+		hospital.registrarMedico(medicoAEncontrar);
+		assertTrue(hospital.darDeBajaUnMedico(01));
+	}
+	
+	@Test
+	public void testQueSePuedaCambiarDeEspecialidadAUnMedico() {
+		
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Medico medico = new Medico("Pablo", "Gomez", 25380657,01,"01-01-2020",60000.0,159865,"Neurologo");
+		hospital.registrarMedico(medico);
+		Especialidad especialidad = new Especialidad(01,"Cardiologia");
+		hospital.agregarEspecialidad(especialidad);
+		assertTrue(hospital.cambiarDeEspecialidadAUnMedico(01, "Cardiologia"));
+		
+	}
 	
 }
