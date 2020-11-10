@@ -5,6 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashSet;
+
 import org.junit.Test;
 
 import junit.framework.Assert;
@@ -261,5 +263,56 @@ public class HospitalTest {
 		
 		assertFalse(hospital1.consultarDisponibilidadDeUnaHabitacion(1, 1));;
 	}
+	
+	@Test
+	public void testQuePermitaCrearUnaConsultaConTurno(){
+		
+		SistemaHospital hospital1 = new SistemaHospital("nuevoHospital");
+		Paciente paciente1 = new Paciente("Carlos", "Gomez", 32781324, 100, "no posee nada", 80.0, 18.0);
+		Medico medico1 = new Medico("Raul", "Ruth", 205467981, 100, "01/03/2010", 60000.0, 987456, "Oftalmologo");
+		Especialidad esp1 = new Especialidad(20, "Oftalmologia");
+		Administrativo adm1 = new Administrativo("Braulio", "Gomez", 284569831, 200, "02/11/2015", 40000.0, "Recepcionista");
+		Turno turno1 = new Turno(1, "miercoles", paciente1, medico1, esp1, adm1);
+		
+		hospital1.registrarPaciente(paciente1);
+		hospital1.registrarMedico(medico1);
+		hospital1.registrarAdministrativo(adm1);
+		hospital1.agregarEspecialidad(esp1);
+		hospital1.registrarMedicoEnEspecialidad(medico1.getId(), esp1.getId());
+		hospital1.asignarTurnoAPaciente(paciente1.getId(), esp1.getId(), medico1.getId(), adm1.getId(), "10/11/2020");
+		
+		String observacion = "Turno con oftalmologo Raul";
+		hospital1.crearNuevaConsultaConTurno(turno1.getId(), "10/11/2020", observacion, adm1);
+		Integer ve= 1;
+		Integer vo= hospital1.getconsultasConTurno().size();
+		
+		assertEquals(ve, vo);	
+	}
+	
+	@Test
+	public void testQuePermitaObtenerUnaListaDeHabitacionesOcupadas() {
+		SistemaHospital hospital1 = new SistemaHospital("nuevoHospital");
+		Piso piso1 = new Piso(1, 1);
+		Paciente juan = new Paciente("Juan", "Gonzales", 328884924, 1, "Sin enfermedades", 80.0, 17.5);
+		Paciente andres = new Paciente("Andres", "Lopez", 328815479, 2, "Sin enfermedades", 77.0, 17.8);
+		Paciente martin = new Paciente("Martin", "Garcia", 328819517, 3, "Sin enfermedades", 75.0, 17.5);		
+		Internacion internacion1 = new Internacion(1, juan, 1, piso1, "10/11/2020", null, "en observacion");
+		Internacion internacion2 = new Internacion(2, andres, 2, piso1, "08/11/2020", null, "en observacion");
+		Internacion internacion3 = new Internacion(3, martin, 3, piso1, "07/11/2020", null, "en observacion");
+		
+		hospital1.registrarInternacion(328884924, piso1, 1);
+		hospital1.registrarInternacion(328815479, piso1, 2);
+		hospital1.registrarInternacion(328819517, piso1, 3);				
+		HashSet<Integer> habOcupadas = new HashSet<Integer>();
+		habOcupadas.add(internacion1.getHabitacion());
+		habOcupadas.add(internacion2.getHabitacion());
+		habOcupadas.add(internacion3.getHabitacion());		
+		
+		assertEquals(habOcupadas, hospital1.obtenerListaDeHabitacionesOcupadas(piso1.getNumero()));
+				
+	}
+	
+	
+	
 	
 }
