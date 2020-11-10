@@ -312,6 +312,26 @@ public class HospitalTest {
 				
 	}
 	
+	@Test
+	public void testQuePermitaobtenerCantidadDeHabitacionesOcupadas() {
+		SistemaHospital hospital1 = new SistemaHospital("nuevoHospital");
+		Piso piso1 = new Piso(1, 1);
+		Paciente juan = new Paciente("Juan", "Gonzales", 328884924, 1, "Sin enfermedades", 80.0, 17.5);
+		Paciente andres = new Paciente("Andres", "Lopez", 328815479, 2, "Sin enfermedades", 77.0, 17.8);
+		Paciente martin = new Paciente("Martin", "Garcia", 328819517, 3, "Sin enfermedades", 75.0, 17.5);		
+		Internacion internacion1 = new Internacion(1, juan, 1, piso1, "10/11/2020", null, "en observacion");
+		Internacion internacion2 = new Internacion(2, andres, 2, piso1, "08/11/2020", null, "en observacion");
+		Internacion internacion3 = new Internacion(3, martin, 3, piso1, "07/11/2020", null, "en observacion");
+		
+		hospital1.registrarInternacion(328884924, piso1, 1);
+		hospital1.registrarInternacion(328815479, piso1, 2);
+		hospital1.registrarInternacion(328819517, piso1, 3);		
+		Integer ve = 3;
+		
+		assertEquals(ve, hospital1.obtenerCantidadDeHabitacionesOcupadas());
+		
+	}
+	
 	
 	
 	
