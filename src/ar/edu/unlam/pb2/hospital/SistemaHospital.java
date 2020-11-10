@@ -226,9 +226,18 @@ public class SistemaHospital {
 		return false;
 	}
 	// FEDERICO
-	public Boolean cambiarDeEspecialidadAUnMedico(Integer dniMedico, Integer idEspecialidad) {
+	public Boolean cambiarDeEspecialidadAUnMedico(Integer dniMedico, Integer idEspecialidad, String especialidad) {
 		
-		return null;
+		Medico medicoBuscado = buscarMedico(dniMedico);
+		medicoBuscado.getEspecialidad();
+		
+		Especialidad espBuscada = buscarEspecialidad(idEspecialidad);
+		if (espBuscada.equals(medicoBuscado.getEspecialidad())) {
+			espBuscada.obtenerListaDeProfesionales().add(medicoBuscado);
+			medicoBuscado.setEspecialidad(especialidad);
+			return true;
+		}
+		return false;	
 	}
 	
 	//Scarlet >>Verifica si el turno ya fue asignado, si no fue asignado el mismo se encuentra disponible -- devuelve True
@@ -339,6 +348,11 @@ public class SistemaHospital {
 	// Federico
 	public HashSet<Medico> obtenerListaDeMedicosDeUnaEspecialidad(Integer idEspecialidad){
 		
+		for(Especialidad especialidad: especialidades) {
+			if(especialidad.getId().equals(idEspecialidad)) {
+				especialidad.obtenerListaDeProfesionales();
+			}
+		}
 		return null;
 	}
 	// Arian
