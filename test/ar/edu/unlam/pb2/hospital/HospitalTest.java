@@ -79,4 +79,23 @@ public class HospitalTest {
 		assertTrue(hospital.agregarEspecialidad(especialidad));
 	}
 	
+	@Test
+	public void testQueSeBuscaUnMedico() {
+		
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Medico medicoAEncontrar = new Medico("Pablo", "Gomez", 25380657,01,"01-01-2020",60000.0,159865,"Cardiologo");
+		hospital.registrarMedico(medicoAEncontrar);
+		Medico medico = hospital.buscarMedico(01);
+		assertEquals(medicoAEncontrar, medico);
+	}
+	
+	@Test
+	public void testQueBuscaUnaEspecialidad() {
+		
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Especialidad especialidadAEncontrar = new Especialidad(01,"Cardiologia");
+		hospital.agregarEspecialidad(especialidadAEncontrar);
+		Especialidad especialidad = hospital.buscarEspecialidad(01);
+		assertEquals(especialidadAEncontrar, especialidad);
+	}
 }
