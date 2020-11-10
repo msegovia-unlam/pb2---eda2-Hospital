@@ -6,12 +6,12 @@ public class SistemaHospital {
 
 	private String nombre;
 	private HashSet<Medico> medicos;
-	private HashSet<Paciente> pacientes;
+	protected HashSet<Paciente> pacientes;
 	private HashSet<Especialidad> especialidades;
 	private HashSet<Piso> pisos;
 	private HashSet<Turno> turnosAsignados;
 	private HashSet<Administrativo> administrativos;
-	private HashSet<Internacion> internacionesIngresadas;
+	protected HashSet<Internacion> internacionesIngresadas;
 	private HashSet<ConsultaSinTurno> consultasSinTurno;
 	private HashSet<ConsultaConTurno> consultasConTurno;
 	private Integer idTurno = 1;
@@ -39,7 +39,7 @@ public class SistemaHospital {
 	// ARIAN
 	public Boolean registrarPaciente(Paciente paciente) {
 		
-		return null;
+		return this.pacientes.add(paciente);
 	}
 	
 	// SCARLET >>> Agrega administrativos a la lista del hospital
@@ -59,9 +59,9 @@ public class SistemaHospital {
 		
 	}
 	// ARIAN
-	public Boolean registrarInternacion(Integer dni, Piso piso, Integer habitacion) {
-		
-		return null;
+	public Boolean registrarInternacion(Internacion idInternacion) 
+	{
+		return this.internacionesIngresadas.add(idInternacion);
 	}
 	
 	//MARTIN
@@ -89,7 +89,13 @@ public class SistemaHospital {
 		return medicoEncontrado;
 	}
 	// ARIAN
-	public Paciente buscarPaciente(Integer idPaciente) {
+	public Paciente buscarPaciente (Integer idPaciente)
+	{
+		for (Paciente paciente: this.pacientes) 
+		{
+			if(paciente.getId().equals(idPaciente))
+				return paciente;
+		}
 		return null;
 	}
 	// FEDERICO
@@ -137,12 +143,20 @@ public class SistemaHospital {
 		return null;		
 	}
 	// ARIAN
-	public Internacion buscarInternacion(Integer idInternacion) {
+	public Internacion buscarInternacion(Integer idInternacion)
+	{
+		for (Internacion internacion: this.internacionesIngresadas) 
+		{
+			if(internacion.getId().equals(idInternacion))
+				return internacion;
+		}
 		return null;
 	}
 	// ARIAN
-	public Boolean darDeAltaAPaciente(Integer dni) {
-		return null;
+	public Boolean darDeAltaAPaciente(Integer idInternacion) 
+	{
+		 return internacionesIngresadas.remove(idInternacion);
+		
 	}
 	
 	// Scarlet >>> Valida la existencia de todos los objetos y asigna un turno al paciente.
@@ -292,9 +306,10 @@ public class SistemaHospital {
 	}
 	
 	// ARIAN
-	public Integer obtenerCantidadDePacientesInternados() {
+	public Integer obtenerCantidadDePacientesInternados() 
+	{
+		return internacionesIngresadas.size();
 		
-		return null;
 	}
 	/*TODO ECHO FEDERICO*/
 	public Integer obtenerCantidadDeConsultasPorEspecialidad(Integer idEspecialidad) {
