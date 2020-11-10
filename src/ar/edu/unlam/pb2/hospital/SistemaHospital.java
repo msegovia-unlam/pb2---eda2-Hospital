@@ -388,6 +388,12 @@ public class SistemaHospital {
 	public void setTurnosAsignados(HashSet<Turno> turnosAsignados) {
 		this.turnosAsignados = turnosAsignados;
 	}
+	public HashSet<ConsultaSinTurno> getConsultasSinTurno() {
+		return consultasSinTurno;
+	}
+	public void setConsultasSinTurno(HashSet<ConsultaSinTurno> consultasSinTurno) {
+		this.consultasSinTurno = consultasSinTurno;
+	}
 	
 	
 	
