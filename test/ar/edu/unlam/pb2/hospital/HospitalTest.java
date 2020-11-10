@@ -182,5 +182,24 @@ public class HospitalTest {
 		assertEquals(cantidadEsperada, cantidadDeTurnos);
 	}
 	
+	@Test 
+	public void queSePuedaCrearUNaConsultaSinTurno() {
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Especialidad kinesiologia = new Especialidad(2, "Kinesiologia");
+		hospital.agregarEspecialidad(kinesiologia);
+		Medico medico = new Medico("Maria", "Gimenez", 25666222, 10, "02-07-2000", 50000.0, 21222, "Kinesiologia");
+		hospital.registrarMedico(medico);
+		hospital.registrarMedicoEnEspecialidad(10, 2);
+		Administrativo admin = new Administrativo("Gustavo", "Ruiz", 30299991, 3, "10-03-2019", 45.000, "Recepcionista");
+		hospital.registrarAdministrativo(admin);
+		Paciente paciente1 = new Paciente("Luis", "Gomez", 29123555, 5, "Hipertenso", 70.5, 1.75);
+		hospital.registrarPaciente(paciente1);
+		hospital.crearNuevaConsultaSinTurno(paciente1.getId(), kinesiologia.getId(), medico.getId(), admin.getId(), "06-11-2020", "Diabetes");
+		
+		Integer cantidadDeConsultasSinturno = hospital.getConsultasSinTurno().size();
+		Integer cantidadEsperada = 1;
+		
+		assertEquals(cantidadEsperada, cantidadDeConsultasSinturno);
+	}
 	
 }
