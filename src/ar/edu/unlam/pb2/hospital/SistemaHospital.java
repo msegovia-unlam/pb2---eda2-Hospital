@@ -53,9 +53,9 @@ public class SistemaHospital {
 		return this.especialidades.add(especialidad);
 	}
 	// MARTIN
-	public Boolean registrarPiso(Piso piso) {
+	public Boolean registrarPiso(Piso piso) {		
+		return this.pisos.add(piso);		
 		
-		return null;
 	}
 	// ARIAN
 	public Boolean registrarInternacion(Integer dni, Piso piso, Integer habitacion) {
@@ -64,8 +64,16 @@ public class SistemaHospital {
 	}
 	
 	//MARTIN
-	public Boolean registrarMedicoEnEspecialidad(Integer dniMedico, Integer idEspecialidad) {
-		return null;
+	public Boolean registrarMedicoEnEspecialidad(Integer idMedico, Integer idEspecialidad) {
+		Medico medicoBuscado = buscarMedico(idMedico);
+		medicoBuscado.getEspecialidad();
+		
+		Especialidad espBuscada = buscarEspecialidad(idEspecialidad);
+		if (espBuscada.equals(medicoBuscado.getEspecialidad())) {
+			espBuscada.obtenerListaDeProfesionales().add(medicoBuscado);
+			return true;
+		}
+		return false;
 	}
 	// FEDERICO
 	public Medico buscarMedico(Integer idMedico) {
