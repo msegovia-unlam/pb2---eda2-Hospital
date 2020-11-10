@@ -153,11 +153,18 @@ public class SistemaHospital {
 		return asignacionExitosa;
 	}
 	
-	// Scarlet
+	// Scarlet >>Busca un turno por su ID y si existe lo remueve de la lista
 	public Boolean cancelarTurno(Integer idTurno) {
+		Boolean cancelacionExitosa = false;
 		
-		return null;
+		Turno turnoBuscado = buscarTurno(idTurno);
+		if(turnoBuscado!=null) {
+			cancelacionExitosa = this.turnosAsignados.remove(turnoBuscado); //Deberia remover de la lista de turnos del paciente tmb!! VER!!
+			turnoBuscado.getPaciente().getTurnos().remove(turnoBuscado);
+		}
+		return cancelacionExitosa;
 	}
+	
 	// Scarlet
 	public Boolean cambiarTurno(Integer idTurno, String dia) {
 		
