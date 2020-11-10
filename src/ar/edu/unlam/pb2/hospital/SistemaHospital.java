@@ -127,6 +127,18 @@ public class SistemaHospital {
 		return turnoBuscado;
 	}
 	
+	//Scarlet >> Busca un turno a traves del id del paciente
+	public Turno buscarTurnoPorIDPaciente(Integer idPaciente) {
+		Turno turnoBuscado = null;
+		for(Turno turno : this.turnosAsignados) {
+			if(turno.getPaciente().getId().equals(idPaciente)) {
+				turnoBuscado = turno;
+			}
+		}
+		return turnoBuscado;
+		
+	}
+	
 	// MARTIN
 	public Piso buscarPiso(Integer idPiso) {
 		
@@ -384,6 +396,12 @@ public class SistemaHospital {
 	
 	public void setTurnosAsignados(HashSet<Turno> turnosAsignados) {
 		this.turnosAsignados = turnosAsignados;
+	}
+	public HashSet<ConsultaSinTurno> getConsultasSinTurno() {
+		return consultasSinTurno;
+	}
+	public void setConsultasSinTurno(HashSet<ConsultaSinTurno> consultasSinTurno) {
+		this.consultasSinTurno = consultasSinTurno;
 	}
 	
 	

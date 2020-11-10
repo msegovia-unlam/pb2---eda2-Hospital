@@ -1,6 +1,7 @@
 package ar.edu.unlam.pb2.hospital;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
@@ -202,4 +203,39 @@ public class HospitalTest {
 		assertEquals(cantidadEsperada, cantidadDeConsultasSinturno);
 	}
 	
+	@Test
+	public void queSePuedaCambiarUnTurno() {
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Especialidad ginecologia = new Especialidad(2, "Ginecologia");
+		hospital.agregarEspecialidad(ginecologia);
+		Medico medico = new Medico("Alfredo", "Suarez", 25666222, 8, "02-07-2000", 50000.0, 21222, "Ginecologia");
+		hospital.registrarMedico(medico);
+		hospital.registrarMedicoEnEspecialidad(medico.getId(), ginecologia.getId());
+		Administrativo admin = new Administrativo("Gustavo", "Ruiz", 30299991, 3, "10-03-2019", 45.000, "Recepcionista");
+		hospital.registrarAdministrativo(admin);
+		Paciente paciente1 = new Paciente("Sara", "Mendez", 29123555, 22, "Diabetes", 65.0, 1.55);
+		hospital.registrarPaciente(paciente1);
+		hospital.asignarTurnoAPaciente(paciente1.getId(), ginecologia.getId(), medico.getId(), admin.getId(), "15-06-2020");
+		Turno turno = hospital.buscarTurnoPorIDPaciente(paciente1.getId());
+		
+		assertTrue(hospital.cambiarTurno(turno.getId(), "10-11-2020"));
+	}
+	
+	@Test
+	public void queSePuedaConsultarSiEstaDisponibleONoUnTurno() {
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Especialidad kinesiologia = new Especialidad(2, "Kinesiologia");
+		hospital.agregarEspecialidad(kinesiologia);
+		Medico medico = new Medico("Maria", "Gimenez", 25666222, 10, "02-07-2000", 50000.0, 21222, "Kinesiologia");
+		hospital.registrarMedico(medico);
+		hospital.registrarMedicoEnEspecialidad(10, 2);
+		Administrativo admin = new Administrativo("Gustavo", "Ruiz", 30299991, 3, "10-03-2019", 45.000, "Recepcionista");
+		hospital.registrarAdministrativo(admin);
+		Paciente paciente1 = new Paciente("Luis", "Gomez", 29123555, 5, "Hipertenso", 70.5, 1.75);
+		hospital.registrarPaciente(paciente1);
+		hospital.asignarTurnoAPaciente(5, 2, 10, 3, "6-11-2020");
+		Turno turno = hospital.buscarTurnoPorIDPaciente(paciente1.getId());
+		
+		assertFalse(hospital.consultarDisponibilidadDeUnTurno(turno.getId()));
+	}
 }
