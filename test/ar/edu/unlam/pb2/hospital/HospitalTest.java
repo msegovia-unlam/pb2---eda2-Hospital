@@ -9,7 +9,7 @@ import junit.framework.Assert;
 
 public class HospitalTest {
 
-	/*@Test
+	@Test
 	public void queSePuedaRegistrarUnAdministrativoEnElHospital() {
 		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
 		Administrativo admin = new Administrativo("Gustavo", "Ruiz", 30299991, 3, "10-03-2019", 45.000, "Recepcionista");
@@ -117,7 +117,7 @@ public class HospitalTest {
 		hospital.agregarEspecialidad(especialidad);
 		assertTrue(hospital.cambiarDeEspecialidadAUnMedico(01, "Cardiologia"));
 		
-	}*/
+	}
 	
 	@Test
 	public void testQueObtengaCantidadDeConsultasPorEspecialidad() {
