@@ -1,8 +1,11 @@
 package ar.edu.unlam.pb2.hospital;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import junit.framework.Assert;
 
 public class HospitalTest {
 
@@ -62,6 +65,18 @@ public class HospitalTest {
 		assertEquals(cantidadEsperada, cantidadTurnos);
 	}
 	
+	@Test
+	public void testQueSePuedaAgregarUnMedico() {
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Medico medico = new Medico("Pablo", "Gomez", 25380657,01,"01-01-2020",60000.0,159865,"Cardiologo");
+		assertTrue(hospital.registrarMedico(medico));
+	}
 	
+	@Test
+	public void testQueSePuedaAgregarUnaEspecialidad() {
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Especialidad especialidad = new Especialidad(01,"Cardiologia");
+		assertTrue(hospital.agregarEspecialidad(especialidad));
+	}
 	
 }
