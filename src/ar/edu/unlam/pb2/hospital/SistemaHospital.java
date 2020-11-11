@@ -41,6 +41,7 @@ public class SistemaHospital {
 	
 	{
 		return this.pacientes.add(paciente);
+	}
 	
 	
 	// SCARLET >>> Agrega administrativos a la lista del hospital

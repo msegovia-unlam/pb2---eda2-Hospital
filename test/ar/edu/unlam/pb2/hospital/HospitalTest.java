@@ -123,96 +123,6 @@ public class HospitalTest {
 		
 	}
 	
-	@Test
-	public void queSePuedaRegistrarUnPaciente() 
-	{
-		SistemaHospital hospital = new SistemaHospital("PAMI");
-		Paciente paciente01 = new Paciente("Valeria", "Martinez", 40199299, 001, "VM-Historial", 68.50, 1.78 );
-		hospital.registrarPaciente(paciente01);
-		Integer cantidadPacientes = hospital.pacientes.size();
-		Integer cantidadRegistrada = 1;
-		assertEquals(cantidadRegistrada, cantidadPacientes);
-	}
-
-
-	@Test
-	public void queSePuedaRegistrarUnaInternacion() 
-	{
-		SistemaHospital hospital2 = new SistemaHospital("PAMI");
-		Paciente paciente02 = new Paciente("Mario", "Martinez", 29177188, 002, "MM-Historial", 81.5, 1.92 );
-		hospital2.registrarPaciente(paciente02);
-		Piso piso1= new Piso (001, 1);
-		Internacion internacion01= new Internacion(0001, paciente02, 235, piso1, "11-11-2020", "A determinar","sin obs");
-		hospital2.registrarInternacion(internacion01);
-		Integer cantidadInternados = hospital2.internacionesIngresadas.size();
-		Integer cantidadRegistrada = 1;
-		assertEquals(cantidadRegistrada, cantidadInternados);
-	}
-	
-	
-	
-	@Test
-	public void queSePuedaBuscarUnPaciente() {
-		SistemaHospital hospital = new SistemaHospital("PAMI");
-		Paciente paciente01 = new Paciente("Valeria", "Martinez", 40199299, 001, "VM-Historial", 68.50, 1.78 );
-		hospital.registrarPaciente(paciente01);
-		Paciente buscadorPaciente = hospital.buscarPaciente(001);
-		Integer idPaciente = buscadorPaciente.getId();
-		Integer idEsperado = 001;
-		assertEquals(idPaciente, idEsperado);
-	}
-	
-	
-	@Test
-	public void queSePuedaBuscarUnaInternacion() 
-	{
-		SistemaHospital hospital2 = new SistemaHospital("PAMI");
-		Paciente paciente02 = new Paciente("Mario", "Martinez", 29177188, 002, "MM-Historial", 81.5, 1.92 );
-		hospital2.registrarPaciente(paciente02);
-		Piso piso1= new Piso (001, 1);
-		Internacion internacion01= new Internacion(0001, paciente02, 235, piso1, "11-11-2020", "A determinar","sin obs");
-		hospital2.registrarInternacion(internacion01);
-		Internacion buscadorInternacion= hospital2.buscarInternacion(0001);
-		Integer idInternacion= buscadorInternacion.getId();
-		Integer idEsperado=0001;
-		assertEquals(idInternacion, idEsperado);
-	}
-	
-
-	@Test
-	public void queSePuedaDarDeAlta() 
-	{
-		SistemaHospital hospital2 = new SistemaHospital("PAMI");
-		Paciente paciente02 = new Paciente("Mario", "Martinez", 29177188, 002, "MM-Historial", 81.5, 1.92 );
-		hospital2.registrarPaciente(paciente02);
-		Piso piso1= new Piso (001, 1);
-		Internacion internacion01= new Internacion(0001, paciente02, 235, piso1, "11-11-2020", "A determinar","sin obs");
-		hospital2.registrarInternacion(internacion01);
-		Boolean statusInternacion= hospital2.darDeAltaAPaciente(0001);
-		Boolean estadoInternacion= statusInternacion;
-		Boolean statusEsperado=false;
-		assertEquals(estadoInternacion, statusEsperado);
-	}
-	
-	@Test
-	public void queSePuedaObtenerCantidadPacientesInternados()
-	{
-		SistemaHospital hospital2 = new SistemaHospital("PAMI");
-		Paciente paciente02 = new Paciente("Mario", "Martinez", 29177188, 002, "MM-Historial", 81.5, 1.92 );
-		hospital2.registrarPaciente(paciente02);
-		Piso piso1= new Piso (001, 1);
-		Internacion internacion01= new Internacion(0001, paciente02, 235, piso1, "11-11-2020", "A determinar","sin obs");
-		hospital2.registrarInternacion(internacion01);
-		
-		
-		Integer cantidadInternados = hospital2.obtenerCantidadDePacientesInternados();
-		Integer cantidadEsperada = 1;
-		assertEquals(cantidadEsperada, cantidadInternados);
-		
-	}
-	
-	
-=======
 	public void testQueObtengaCantidadDeConsultasPorEspecialidad() {
 		
 		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
@@ -571,20 +481,8 @@ public class HospitalTest {
 		Piso piso1= new Piso (001, 1);
 		Internacion internacion01= new Internacion(0001, paciente02, 235, piso1, "11-11-2020", "A determinar","sin obs");
 		hospital2.registrarInternacion(internacion01);
-		
-		
 		Integer cantidadInternados = hospital2.obtenerCantidadDePacientesInternados();
 		Integer cantidadEsperada = 1;
 		assertEquals(cantidadEsperada, cantidadInternados);
-		
 	}
-	
-	
-	@Test
-	public void queSeObtengaListaDePacientesConTurno()
-	
-	
-	
-
->>>>>>> 9472d11d5cfcfbfbffad4e8fefe6de44b08b38c4
 }
