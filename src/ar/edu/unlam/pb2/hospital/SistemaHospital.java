@@ -403,6 +403,10 @@ public class SistemaHospital {
 	public void setConsultasSinTurno(HashSet<ConsultaSinTurno> consultasSinTurno) {
 		this.consultasSinTurno = consultasSinTurno;
 	}
+	public HashSet<ConsultaConTurno> getconsultasConTurno() {
+		
+		return consultasConTurno;
+	}
 	
 	
 	
