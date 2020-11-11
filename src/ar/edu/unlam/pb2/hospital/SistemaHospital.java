@@ -70,10 +70,9 @@ public class SistemaHospital {
 	//MARTIN
 	public Boolean registrarMedicoEnEspecialidad(Integer idMedico, Integer idEspecialidad) {
 		Medico medicoBuscado = buscarMedico(idMedico);
-		medicoBuscado.getEspecialidad();
 		
 		Especialidad espBuscada = buscarEspecialidad(idEspecialidad);
-		if (espBuscada.equals(medicoBuscado.getEspecialidad())) {
+		if (espBuscada!=null) {
 			espBuscada.obtenerListaDeProfesionales().add(medicoBuscado);
 			return true;
 		}
@@ -333,6 +332,7 @@ public class SistemaHospital {
 		if(pacienteBuscado!=null && adminBuscado!=null && especialidadBuscada!=null) {
 			if(medicoBuscado!=null && especialidadBuscada.obtenerListaDeProfesionales().contains(medicoBuscado)) {
 					ConsultaSinTurno nuevaConsulta = new ConsultaSinTurno(idConsultaSinTurno, fecha, pacienteBuscado, medicoBuscado, especialidadBuscada, adminBuscado, observacion); 
+					this.consultasSinTurno.add(nuevaConsulta);
 					idConsultaSinTurno++;
 					creacionExitosa = true;
 				}
