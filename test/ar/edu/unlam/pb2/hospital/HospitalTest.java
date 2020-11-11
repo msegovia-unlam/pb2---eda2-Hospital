@@ -459,7 +459,7 @@ public class HospitalTest {
 		
 	}
 	
-	@Test 
+	@Test //
 	public void queSePuedaAsignarMasDeUnTurnoAUnPaciente() {
 		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
 		Especialidad ginecologia = new Especialidad(2, "Ginecologia");
@@ -480,8 +480,8 @@ public class HospitalTest {
 		Paciente paciente1 = new Paciente("Sara", "Mendez", 29123555, 22, "Diabetes", 65.0, 1.55);
 		hospital.registrarPaciente(paciente1);
 		hospital.asignarTurnoAPaciente(paciente1.getId(), ginecologia.getId(), medico2.getId(), admin.getId(), "15-06-2020");
-		hospital.asignarTurnoAPaciente(paciente1.getId(), oftalmologia.getId(), medico.getId(), admin.getId(), "15-06-2020");
-		hospital.asignarTurnoAPaciente(paciente1.getId(), dermatologia.getId(), medico.getId(), admin.getId(), "15-06-2020");
+		hospital.asignarTurnoAPaciente(paciente1.getId(), oftalmologia.getId(), medico.getId(), admin.getId(), "10-06-2020");
+		hospital.asignarTurnoAPaciente(paciente1.getId(), dermatologia.getId(), medico.getId(), admin.getId(), "02-04-2020");
 		
 		Integer cantidadTurnosDelPaciente = paciente1.getTurnos().size();
 		Integer cantidadEsperada = 3;
