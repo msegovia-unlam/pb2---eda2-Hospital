@@ -489,6 +489,52 @@ public class HospitalTest {
 		assertEquals(cantidadEsperada, cantidadTurnosDelPaciente);
 	}
 	
+	@Test
+	public void queSePuedaObtenerListaDePacientesQueNoAsistieron() {
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Especialidad clinico = new Especialidad(2, "Clinica medica");
+		Especialidad oftalmologia = new Especialidad(9, "Oftalmologia");
+		hospital.agregarEspecialidad(clinico);
+		hospital.agregarEspecialidad(oftalmologia);
+		Medico medico1 = new Medico("Alfredo", "Suarez", 25666222, 8, "02-07-2000", 50000.0, 21222, "Clinica medica");
+		hospital.registrarMedico(medico1);
+		hospital.registrarMedicoEnEspecialidad(medico1.getId(), clinico.getId());
+		Medico medico2 = new Medico("Lucia", "Suarez", 25666222, 28, "02-07-2000", 50000.0, 21222, "Oftalmologia");
+		hospital.registrarMedico(medico2);
+		hospital.registrarMedicoEnEspecialidad(medico2.getId(), oftalmologia.getId());
+		Administrativo admin = new Administrativo("Gustavo", "Ruiz", 30299991, 3, "10-03-2019", 45.000, "Recepcionista");
+		hospital.registrarAdministrativo(admin);
+		
+		Paciente sara = new Paciente("Sara", "Mendez", 29123555, 22, "Diabetes", 65.0, 1.55);
+		hospital.registrarPaciente(sara);
+		hospital.asignarTurnoAPaciente(sara.getId(), oftalmologia.getId(), medico2.getId(), admin.getId(), "15-06-2020");
+		hospital.asignarTurnoAPaciente(sara.getId(), clinico.getId(), medico1.getId(), admin.getId(), "18-06-2020"); 
+		
+		Paciente luis = new Paciente("Luis", "Gomez", 29123555, 5, "Hipertenso", 70.5, 1.75);
+		hospital.registrarPaciente(luis);
+		hospital.asignarTurnoAPaciente(luis.getId(), clinico.getId(), medico1.getId(), admin.getId(), "17-06-2020");
+		hospital.asignarTurnoAPaciente(luis.getId(), oftalmologia.getId(), medico2.getId(), admin.getId(), "03-06-2020");//no asistio aun
+		
+		Paciente jose = new Paciente("Jose", "Chavez", 29123555, 18, "Hipertenso", 70.5, 1.75);
+		hospital.registrarPaciente(jose);
+		hospital.asignarTurnoAPaciente(jose.getId(), clinico.getId(), medico1.getId(), admin.getId(), "10-06-2020");
+		hospital.asignarTurnoAPaciente(jose.getId(), oftalmologia.getId(), medico2.getId(), admin.getId(), "11-06-2020");//no asistio aun
+		hospital.asignarTurnoAPaciente(jose.getId(), clinico.getId(), medico1.getId(), admin.getId(), "30-05-2020"); //no asistio aun
+		
+		Turno turnoBuscado = hospital.buscarTurnoDeUnPaciente(sara.getId(), "15-06-2020");
+		hospital.crearNuevaConsultaConTurno(turnoBuscado.getId(), "15-06-2020", "Diabetes", admin);
+		Turno turnoBuscado2 = hospital.buscarTurnoDeUnPaciente(sara.getId(), "18-06-2020");
+		hospital.crearNuevaConsultaConTurno(turnoBuscado2.getId(), "18-06-2020", "Diabetes", admin);
+		Turno turnoBuscado3 = hospital.buscarTurnoDeUnPaciente(luis.getId(), "17-06-2020");
+		hospital.crearNuevaConsultaConTurno(turnoBuscado.getId(), "17-06-2020", "Diabetes", admin);
+		Turno turnoBuscado4 = hospital.buscarTurnoDeUnPaciente(jose.getId(), "10-06-2020");
+		hospital.crearNuevaConsultaConTurno(turnoBuscado.getId(), "10-06-2020", "Diabetes", admin);
+		
+		Integer cantidadObtenida = hospital.obtenerListaDePacientesQueNoAsistieronAlTurno().size();
+		Integer cantidadEsperada = 3;
+		
+		assertEquals(cantidadEsperada, cantidadObtenida);
+	}
 	
 	@Test
 	public void queSePuedaRegistrarUnPaciente() 
@@ -577,6 +623,8 @@ public class HospitalTest {
 		assertEquals(cantidadEsperada, cantidadInternados);
 		
 	}
+	
+	
 	
 	
 	@Test
