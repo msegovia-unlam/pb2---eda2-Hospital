@@ -59,9 +59,9 @@ public class SistemaHospital {
 		
 	}
 	// ARIAN
-	public Boolean registrarInternacion(Integer dni, Piso piso, Integer habitacion) {
+	public Boolean registrarInternacion(Internacion idInternacion) {
 		
-		return null;
+		return this.internacionesIngresadas.add(idInternacion);
 	}
 	
 	//MARTIN
