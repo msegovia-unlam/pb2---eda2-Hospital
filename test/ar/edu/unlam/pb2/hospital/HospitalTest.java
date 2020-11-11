@@ -120,7 +120,7 @@ public class HospitalTest {
 		
 	}
 	
-	@Test
+	/*@Test
 	public void testQueObtengaCantidadDeConsultasPorEspecialidad() {
 		
 		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
@@ -140,7 +140,7 @@ public class HospitalTest {
 		Integer cantidadDeConsultas = 3;
 		
 		assertEquals(cantidadDeConsultas, hospital.obtenerCantidadDeConsultasPorEspecialidad(01));
-	}
+	}*/
 	
 	@Test
 	public void testParaUnMedicoNoEncontrado() {
