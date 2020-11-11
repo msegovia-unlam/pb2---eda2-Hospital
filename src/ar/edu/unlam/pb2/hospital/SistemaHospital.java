@@ -37,10 +37,11 @@ public class SistemaHospital {
 	
 	}
 	// ARIAN
-	public Boolean registrarPaciente(Paciente paciente) {
-		
+	public Boolean registrarPaciente(Paciente paciente) 
+	
+	{
 		return this.pacientes.add(paciente);
-	}
+	
 	
 	// SCARLET >>> Agrega administrativos a la lista del hospital
 	public Boolean registrarAdministrativo(Administrativo administrativo) {
@@ -59,9 +60,10 @@ public class SistemaHospital {
 		
 	}
 	// ARIAN
+
 	public Boolean registrarInternacion(Internacion idInternacion) 
 	{
-		return this.internacionesIngresadas.add(idInternacion);
+	return this.internacionesIngresadas.add(idInternacion);
 	}
 	
 	//MARTIN
@@ -133,6 +135,18 @@ public class SistemaHospital {
 		return turnoBuscado;
 	}
 	
+	//Scarlet >> Busca un turno a traves del id del paciente
+	public Turno buscarTurnoPorIDPaciente(Integer idPaciente) {
+		Turno turnoBuscado = null;
+		for(Turno turno : this.turnosAsignados) {
+			if(turno.getPaciente().getId().equals(idPaciente)) {
+				turnoBuscado = turno;
+			}
+		}
+		return turnoBuscado;
+		
+	}
+	
 	// MARTIN
 	public Piso buscarPiso(Integer idPiso) {
 		
@@ -152,6 +166,7 @@ public class SistemaHospital {
 		}
 		return null;
 	}
+	
 	// ARIAN
 	public Boolean darDeAltaAPaciente(Integer idInternacion) 
 	{
@@ -240,7 +255,7 @@ public class SistemaHospital {
 		return false;
 	}
 	// FEDERICO
-	public Boolean cambiarDeEspecialidadAUnMedico(Integer idMedico, String especialidad) {
+	public Boolean cambiarDeEspecialidadAUnMedico(Integer idMedico,  String especialidad) {
 		
 		for(Medico medico : medicos) {
 			if(medico.getId().equals(idMedico)) {
@@ -378,10 +393,17 @@ public class SistemaHospital {
 		}
 		return null;
 	}
-	// Arian
-	public HashSet<Turno> obtenerListaDeTurnosDeUnPaciente(Integer dni){
-		
-		return null;
+	public HashSet<Turno> obtenerListaDeTurnosDeUnPaciente(Integer id)
+	{
+		HashSet<Turno> listaDeTurnosPorPaciente= new HashSet<>();
+		for(Turno turnos : this.turnosAsignados)
+		{
+			if(turnos.getPaciente().getId().equals(id)) 
+			{
+				listaDeTurnosPorPaciente.add(turnos);
+			}
+		}
+		return listaDeTurnosPorPaciente;
 	}
 	
 	
@@ -399,6 +421,16 @@ public class SistemaHospital {
 	
 	public void setTurnosAsignados(HashSet<Turno> turnosAsignados) {
 		this.turnosAsignados = turnosAsignados;
+	}
+	public HashSet<ConsultaSinTurno> getConsultasSinTurno() {
+		return consultasSinTurno;
+	}
+	public void setConsultasSinTurno(HashSet<ConsultaSinTurno> consultasSinTurno) {
+		this.consultasSinTurno = consultasSinTurno;
+	}
+	public HashSet<ConsultaConTurno> getconsultasConTurno() {
+		
+		return consultasConTurno;
 	}
 	
 	
