@@ -124,7 +124,6 @@ public class HospitalTest {
 	}
 	
 	@Test
-<<<<<<< HEAD
 	public void queSePuedaRegistrarUnPaciente() 
 	{
 		SistemaHospital hospital = new SistemaHospital("PAMI");
