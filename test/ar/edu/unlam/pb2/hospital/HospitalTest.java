@@ -294,13 +294,12 @@ public class HospitalTest {
 		assertEquals(cantidadEsperada, cantidadDeConsultasSinturno);
 	}
 	
-	@Test
-
+	@Test//
 	public void queSePuedaCambiarUnTurno() {
 		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
 		Especialidad ginecologia = new Especialidad(2, "Ginecologia");
 		hospital.agregarEspecialidad(ginecologia);
-		Medico medico = new Medico("Alfredo", "Suarez", 25666222, 8, "02-07-2000", 50000.0, 21222, "Ginecologia");
+		Medico medico = new Medico("Alfredo", "Suarez", 25666222, 8, "02-07-2000", 50000.0, 21222, "Kinesiologia");
 		hospital.registrarMedico(medico);
 		hospital.registrarMedicoEnEspecialidad(medico.getId(), ginecologia.getId());
 		Administrativo admin = new Administrativo("Gustavo", "Ruiz", 30299991, 3, "10-03-2019", 45.000, "Recepcionista");
@@ -308,7 +307,7 @@ public class HospitalTest {
 		Paciente paciente1 = new Paciente("Sara", "Mendez", 29123555, 22, "Diabetes", 65.0, 1.55);
 		hospital.registrarPaciente(paciente1);
 		hospital.asignarTurnoAPaciente(paciente1.getId(), ginecologia.getId(), medico.getId(), admin.getId(), "15-06-2020");
-		Turno turno = hospital.buscarTurnoPorIDPaciente(paciente1.getId());
+		Turno turno = hospital.buscarTurnoDeUnPaciente(paciente1.getId(), "15-06-2020");
 		
 		assertTrue(hospital.cambiarTurno(turno.getId(), "10-11-2020"));
 	}

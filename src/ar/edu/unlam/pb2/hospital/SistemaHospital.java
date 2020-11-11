@@ -146,6 +146,21 @@ public class SistemaHospital {
 		return turnoBuscado;
 		
 	}
+	//Scarlet
+	public Turno buscarTurnoDeUnPaciente(Integer idPaciente, String fecha) {
+		Turno turnoBuscado = null;
+		
+		Paciente pacienteBuscado = buscarPaciente(idPaciente);
+		
+		if(pacienteBuscado!=null) {
+			for(Turno turno : pacienteBuscado.getTurnos()) {
+				if(turno.getDia().equals(fecha)) {
+					turnoBuscado = turno;
+				}
+			}
+		}
+		return turnoBuscado;
+	}
 	
 	// MARTIN
 	public Piso buscarPiso(Integer idPiso) {
