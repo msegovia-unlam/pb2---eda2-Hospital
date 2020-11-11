@@ -206,6 +206,42 @@ public class HospitalTest {
 	}
 	
 	@Test
+
+	public void queSePuedaCambiarUnTurno() {
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Especialidad ginecologia = new Especialidad(2, "Ginecologia");
+		hospital.agregarEspecialidad(ginecologia);
+		Medico medico = new Medico("Alfredo", "Suarez", 25666222, 8, "02-07-2000", 50000.0, 21222, "Ginecologia");
+		hospital.registrarMedico(medico);
+		hospital.registrarMedicoEnEspecialidad(medico.getId(), ginecologia.getId());
+		Administrativo admin = new Administrativo("Gustavo", "Ruiz", 30299991, 3, "10-03-2019", 45.000, "Recepcionista");
+		hospital.registrarAdministrativo(admin);
+		Paciente paciente1 = new Paciente("Sara", "Mendez", 29123555, 22, "Diabetes", 65.0, 1.55);
+		hospital.registrarPaciente(paciente1);
+		hospital.asignarTurnoAPaciente(paciente1.getId(), ginecologia.getId(), medico.getId(), admin.getId(), "15-06-2020");
+		Turno turno = hospital.buscarTurnoPorIDPaciente(paciente1.getId());
+		
+		assertTrue(hospital.cambiarTurno(turno.getId(), "10-11-2020"));
+	}
+	
+	@Test
+	public void queSePuedaConsultarSiEstaDisponibleONoUnTurno() {
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Especialidad kinesiologia = new Especialidad(2, "Kinesiologia");
+		hospital.agregarEspecialidad(kinesiologia);
+		Medico medico = new Medico("Maria", "Gimenez", 25666222, 10, "02-07-2000", 50000.0, 21222, "Kinesiologia");
+		hospital.registrarMedico(medico);
+		hospital.registrarMedicoEnEspecialidad(10, 2);
+		Administrativo admin = new Administrativo("Gustavo", "Ruiz", 30299991, 3, "10-03-2019", 45.000, "Recepcionista");
+		hospital.registrarAdministrativo(admin);
+		Paciente paciente1 = new Paciente("Luis", "Gomez", 29123555, 5, "Hipertenso", 70.5, 1.75);
+		hospital.registrarPaciente(paciente1);
+		hospital.asignarTurnoAPaciente(5, 2, 10, 3, "6-11-2020");
+		Turno turno = hospital.buscarTurnoPorIDPaciente(paciente1.getId());
+		
+		assertFalse(hospital.consultarDisponibilidadDeUnTurno(turno.getId()));
+	}
+
 	public void testQuePermitaRegistrarPisos(){
 		Piso piso1 = new Piso(1, 1);		
 		
@@ -332,7 +368,36 @@ public class HospitalTest {
 		
 	}
 	
+	@Test 
+	public void queSePuedaAsignarMasDeUnTurnoAUnPaciente() {
+		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
+		Especialidad ginecologia = new Especialidad(2, "Ginecologia");
+		Especialidad oftalmologia = new Especialidad(9, "Oftalmologia");
+		Especialidad dermatologia = new Especialidad(4, "Dermatologia");
+		hospital.agregarEspecialidad(ginecologia);
+		hospital.agregarEspecialidad(oftalmologia);
+		hospital.agregarEspecialidad(dermatologia);
+		Medico medico = new Medico("Alfredo", "Suarez", 25666222, 8, "02-07-2000", 50000.0, 21222, "Oftalmologia-Dermatologia");
+		hospital.registrarMedico(medico);
+		hospital.registrarMedicoEnEspecialidad(medico.getId(), oftalmologia.getId());
+		hospital.registrarMedicoEnEspecialidad(medico.getId(), dermatologia.getId());
+		Medico medico2 = new Medico("Lucia", "Suarez", 25666222, 28, "02-07-2000", 50000.0, 21222, "Ginecologia");
+		hospital.registrarMedico(medico2);
+		hospital.registrarMedicoEnEspecialidad(medico2.getId(), ginecologia.getId());
+		Administrativo admin = new Administrativo("Gustavo", "Ruiz", 30299991, 3, "10-03-2019", 45.000, "Recepcionista");
+		hospital.registrarAdministrativo(admin);
+		Paciente paciente1 = new Paciente("Sara", "Mendez", 29123555, 22, "Diabetes", 65.0, 1.55);
+		hospital.registrarPaciente(paciente1);
+		hospital.asignarTurnoAPaciente(paciente1.getId(), ginecologia.getId(), medico2.getId(), admin.getId(), "15-06-2020");
+		hospital.asignarTurnoAPaciente(paciente1.getId(), oftalmologia.getId(), medico.getId(), admin.getId(), "15-06-2020");
+		hospital.asignarTurnoAPaciente(paciente1.getId(), dermatologia.getId(), medico.getId(), admin.getId(), "15-06-2020");
+		
+		Integer cantidadTurnosDelPaciente = paciente1.getTurnos().size();
+		Integer cantidadEsperada = 3;
+		
+		assertEquals(cantidadEsperada, cantidadTurnosDelPaciente);
+	}
 	
 	
-	
+
 }
