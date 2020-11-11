@@ -313,7 +313,7 @@ public class HospitalTest {
 	}
 	
 	@Test
-	public void queSePuedaConsultarSiEstaDisponibleONoUnTurno() {
+	public void queSePuedaConsultarSiEstaDisponibilidadUnTurno() {
 		SistemaHospital hospital = new SistemaHospital("Centro San Justo");
 		Especialidad kinesiologia = new Especialidad(2, "Kinesiologia");
 		hospital.agregarEspecialidad(kinesiologia);
